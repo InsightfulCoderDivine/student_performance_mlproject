@@ -35,7 +35,7 @@ class DataIngestion:
             df=pd.read_csv("notebook\data\stud.csv")
             logging.info("Reading the dataset as Dataframe.")
             
-            # Ensure the directory for the train and test files exists 
+            # Ensure the directory for the train and test files exists. Create if not exist
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
             
             # Saves the raw dataset into the raw_data_path
@@ -58,7 +58,10 @@ class DataIngestion:
             raise CustomException(e, sys)
         
         
-# if __name__ == "__main__":
-#     data_ingest_obj = DataIngestion()        
-#     data_ingest_obj.initiate_data_ingestion()
+if __name__ == "__main__":
+    data_ingest_obj = DataIngestion()        
+    train_data, test_data = data_ingest_obj.initiate_data_ingestion()
+    
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_path=train_data, test_path=test_data)
     
