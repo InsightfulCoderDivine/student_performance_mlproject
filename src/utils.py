@@ -30,6 +30,20 @@ def save_object(file_path, obj):
     except Exception as e:
         raise CustomException(e, sys)
     
+    
+def load_object(file_path):
+    """Loads a file in Python.
+
+    Args:
+        file_path (str): Path to file.
+    """
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return pickle.load(file_obj)
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+    
 def evaluate_model(X_train, y_train,X_test,y_test,models,param):
     """Function to evaluate multiple models with hyperparameter tuning and return test scores"""
     try:
